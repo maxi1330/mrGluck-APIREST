@@ -5,6 +5,7 @@ const e = require("express");
 
 // ======================
 //  Verificar Token
+//  Token viene por en el header
 // ======================
 
 let verificaToken = (req,res, next) => {
@@ -43,6 +44,7 @@ let verificaAdmin_Role = (req,res, next) => {
 
 // ======================
 //  Verificar Token para imagen
+//  Token viene por un queryparams
 // ======================
 
 let verificaTokenImg = (req, res, next) =>{
