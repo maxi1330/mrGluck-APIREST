@@ -92,10 +92,11 @@ app.put('/articulos/:id', (req, res)=>{
                 }
             });
         }
-
+    
         articuloDB.titulo = body.titulo;
         articuloDB.descripcion = body.descripcion;
         articuloDB.precio = body.precio;
+        articuloDB.categoria = body.categoria;
         articuloDB.urlImagen = body.urlImagen;
 
         articuloDB.save( (err, articuloGuardado) => {
