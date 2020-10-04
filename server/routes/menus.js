@@ -21,7 +21,7 @@ app.get('/menu/:id', (req, res)=>{
                 });
             }
             if(!negocioEncontrado) {
-                return res.status(500).json({
+                return res.status(400).json({
                     ok: false
                 });
             }
