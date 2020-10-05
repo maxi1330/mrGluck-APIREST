@@ -86,13 +86,13 @@ app.post('/negocio', (req, res) => {
 
 app.get('/search', (req, res)=>{
 
-    let page = req.query.page || 0;
+    let page = req.query.page || 1;
     page = Number(page);
 
     let limit = req.query.limit || PAGE_SIZE_DEFAULT;
     limit = Number(limit);
 
-    const skip = page * PAGE_SIZE_DEFAULT;
+    const skip = (page -1) * PAGE_SIZE_DEFAULT;
 
     let filter = req.query.filter || "";
     let regex = new RegExp(filter, 'i');
