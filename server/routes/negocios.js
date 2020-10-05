@@ -3,6 +3,8 @@ const Negocio = require('../models/negocio');
 
 const app = express();
 
+const PAGE_SIZE_DEFAULT = 20;
+
 // ==========================
 // Obtener negocio por Id
 // ==========================
@@ -75,6 +77,49 @@ app.post('/negocio', (req, res) => {
             message: 'Negocio creado con exito'
         });
     });
+});
+
+// ==========================
+// Obtener un negocio filtrado por nombre y paginado
+// /negocio?page=0&filter=coso&limit=10 --> todos son opcionales
+// ==========================
+
+app.get('/negocio', (req, res)=>{
+
+    let page = req.query.page || 0;
+    page = Number(page);
+
+    let limit = req.query.limit || PAGE_SIZE_DEFAULT;
+    limit = Number(limit);
+
+    const skip = page * PAGE_SIZE_DEFAULT;
+
+    let filter = req.query.filter || "";
+    let regex = new RegExp(filter, 'i');
+
+    Negocio.find({ active: true, name: regex }, 
+        'name logo imageBanner category whatsappPhone phoneLocal facebook instagram address idUrl horarios')
+        .skip(skip)
+        .limit(limit)
+        .exec((err, negocios) => {
+            if(err) {
+                return res.status(500).json({
+                    ok: false,
+                    err
+                });
+            }
+            if(!negocios.length > 0){
+                return res.status(400).json({
+                    ok: false,
+                    message: 'No se encontraron negocios'
+                });
+            }
+
+            res.json({
+                    ok: true,
+                    negocios
+            });  
+        });
 });
 
 module.exports = app;
