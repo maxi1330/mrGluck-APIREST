@@ -81,10 +81,10 @@ app.post('/negocio', (req, res) => {
 
 // ==========================
 // Obtener un negocio filtrado por nombre y paginado
-// /negocio?page=0&filter=coso&limit=10 --> todos son opcionales
+// /negocio/search?page=0&filter=coso&limit=10 --> todos son opcionales
 // ==========================
 
-app.get('/search', (req, res)=>{
+app.get('/negocio/search', (req, res)=>{
 
     let page = req.query.page || 1;
     page = Number(page);
