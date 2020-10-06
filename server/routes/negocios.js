@@ -84,7 +84,7 @@ app.post('/negocio', (req, res) => {
 // /negocio/search?page=0&filter=coso&limit=10 --> todos son opcionales
 // ==========================
 
-app.get('/negocio/search', (req, res)=>{
+app.get('/search/negocio', (req, res)=>{
 
     let page = req.query.page || 1;
     page = Number(page);
