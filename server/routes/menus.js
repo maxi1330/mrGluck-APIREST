@@ -22,7 +22,8 @@ app.get('/menu/:id', (req, res)=>{
             }
             if(!negocioEncontrado) {
                 return res.status(400).json({
-                    ok: false
+                    ok: false,
+                    message: 'No se encontro el negocio'
                 });
             }
 
